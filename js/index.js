@@ -1,12 +1,13 @@
-"use strict"
+
+
 
 const showTaskSection = document.querySelector(".showTaskSection");
 const btnTask = document.getElementById("btnTask");
 
 btnTask.addEventListener("click", addTaskToArray);
+window.addEventListener("load", onLoadTasks);
 
-let myTasks = [];
-addTaskToLocalStorage();
+
 
 /* checkLocalStorage(); */
 function checkLocalStorage() {
@@ -21,32 +22,46 @@ function checkLocalStorage() {
 
 
 
-
-
+let newTask = document.getElementById("task").value;
+let myTasks = [];
 function addTaskToArray() {
-    const newTask = document.getElementById("task").value;
-    if(myTasks.includes(newTask) === false) {
-        myTasks.push(newTask);
+   /*  if(newTask.length === 0) {
+        alert("Please add some task!");
+        return;
     }
+    if(myTasks.includes(newTask)) {
+        alert("Task already exists!");
+        return;
+    } */
+    myTasks.push(newTask);
+    showTask(newTask);
+    addTaskToLocalStorage(); 
 }
 function addTaskToLocalStorage() {
-    if(myTasks.length > 0) {
-        localStorage.setItem("tasks", JSON.stringify(myTasks));
-        const storedTasks = JSON.parse(localStorage.getItem("tasks"));
-        storedTasks.forEach(function(eachTask) {
-            showTask(eachTask);
-        })
-    }
+    localStorage.setItem("tasks", JSON.stringify(myTasks));
 }
-
-
-
+function onLoadTasks() {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    storedTasks.forEach(function(eachTask) {
+        showTask(eachTask);
+    })
+    myTasks = storedTasks;
+}
+function removeTask() {
+    myTasks.splice(myTasks.indexOf(newTask), 1);
+    localStorage.removeItem("tasks", JSON.stringify(myTasks.indexOf(newTask)));
+}
 function showTask(item) {
     const divTask = document.createElement("div");
-    const text = item;
-    divTask.append(text);
+    divTask.classList.add(".item");
+    const text = `
+    <p style="display: inline;">${item}</p>
+    <button style="width: 20px; height: 20px;" type="button" ></button>
+    `;
+    divTask.innerHTML = text;
     showTaskSection.appendChild(divTask);
 }
+
 
 
 
