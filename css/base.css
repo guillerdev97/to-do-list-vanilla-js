@@ -1,0 +1,48 @@
+@import url("./header.css");
+
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    color: white;
+    background-color: #0C2D48;
+}
+
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+
+    border: 1px solid black;
+}
+.addTaskSection {
+    width: 30%;
+    height: 150px;
+    background-color: #2E8BC0;
+
+    border: 1px solid black;
+}
+.showTaskSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 80%;
+    height: auto;
+    background-color: #2E8BC0;
+    border: 1px solid black;
+}
+.item {
+    width: 90%;
+    height: 80px;
+
+    border: 1px solid black;
+}
